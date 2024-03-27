@@ -35,6 +35,8 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+      - name: Enviroment
+        run: cp env.json.example env.json
       - name: Instalando dependecias
         run: npm install
       - name: Build
