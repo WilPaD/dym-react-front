@@ -8,6 +8,7 @@ function App() {
   const [count, setCount] = useState(0)
   const api_path = config.api_path
   const app_name = import.meta.env.VITE_APP_NAME
+  const mode_dev = import.meta.env.VITE_APP_MODE_DEV
   return (
     <>
       <div>
@@ -37,7 +38,7 @@ function App() {
         {app_name}
       </p>
       <p className="read-the-docs">
-        {import.meta.env.VITE_APP_MODE_DEV}
+        {mode_dev}
       </p>
     </>
   )
