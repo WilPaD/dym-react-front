@@ -7,6 +7,7 @@ import config from '../env.json';
 function App() {
   const [count, setCount] = useState(0)
   const api_path = config.api_path
+  const app_name = import.meta.env.VITE_APP_NAME
   return (
     <>
       <div>
@@ -26,11 +27,17 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
+      {/* <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
       <p className="read-the-docs">
         {api_path}
+      </p>
+      <p className="read-the-docs">
+        {app_name}
+      </p>
+      <p className="read-the-docs">
+        {import.meta.env.VITE_APP_MODE_DEV}
       </p>
     </>
   )

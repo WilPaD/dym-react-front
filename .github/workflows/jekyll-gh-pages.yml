@@ -4,7 +4,7 @@ name: Implementar contenido estático a Pages
 on:
   # Se ejecuta en anotaciones dirigidas a la rama predeterminada
   push:
-    branches: ['master']
+    branches: ["master"]
 
   # Te permite ejecutar este flujo de trabajo manualmente desde la pestaña Acciones
   workflow_dispatch:
@@ -17,7 +17,7 @@ permissions:
 
 # Permite una implementación simultánea
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
@@ -26,28 +26,31 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'npm'
-      - name: Enviroment
-        run: cp env.json.example env.json
-      - name: Instalando dependecias
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Configurando Pages
-        uses: actions/configure-pages@v3
-      - name: Subiendo dist
-        uses: actions/upload-pages-artifact@v2
-        with:
-          # Subir repositorio dist
-          path: './dist'
-      - name: Deploy en GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+  runs-on: ubuntu-latest
+  env: 
+    VITE_APP_NAME: ${{ secrets.VITE_APP_NAME }}
+    VITE_APP_MODE_DEV: ${{ env.VITE_APP_MODE_DEV}}
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: "npm"
+    - name: Enviroment
+      run: cp env.json.example env.json
+    - name: Instalando dependecias
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Configurando Pages
+      uses: actions/configure-pages@v3
+    - name: Subiendo dist
+      uses: actions/upload-pages-artifact@v2
+      with:
+        # Subir repositorio dist
+        path: "./dist"
+    - name: Deploy en GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
