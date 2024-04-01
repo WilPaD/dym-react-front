@@ -20,6 +20,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+env: 
+    VITE_APP_NAME: ${{ secrets.VITE_APP_NAME }}
+    VITE_APP_MODE_DEV: ${{ env.VITE_APP_MODE_DEV}}
 jobs:
   # Trabajo de implementación único ya que solo estamos implementando
   deploy:
@@ -27,9 +30,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
   runs-on: ubuntu-latest
-  env: 
-    VITE_APP_NAME: ${{ secrets.VITE_APP_NAME }}
-    VITE_APP_MODE_DEV: ${{ env.VITE_APP_MODE_DEV}}
   steps:
     - name: Checkout
       uses: actions/checkout@v4
