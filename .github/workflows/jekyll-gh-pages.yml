@@ -22,7 +22,7 @@ concurrency:
 
 env: 
   VITE_APP_NAME: ${{ secrets.VITE_APP_NAME }}
-  # VITE_APP_MODE_DEV: ${{ enviroment.VITE_APP_MODE_DEV}}
+  VITE_APP_MODE_DEV: ${{ variables.VITE_APP_MODE_DEV}}
 
 jobs:
   # Trabajo de implementación único ya que solo estamos implementando
